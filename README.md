@@ -14,37 +14,37 @@ var simpleObject = Builder<SimpleObject>.Create(ob => ob
 ``` csharp
 var complexObject = Builder<ComplexObject>.Create(b => b
     .WithCtorArg(() => Builder<SimpleObject>.Create())
-    .With(co => co.List = ListBuilder.Create(lb => lb
-        .Add(Builder<ItemObject>.Create())
-        .Add(Builder<ItemObject>.Create()))));
+    .With(co => co.List = ListBuilder<ItemObject>.Create(lb => lb
+.Add(Builder<ItemObject>.Create())
+.Add(Builder<ItemObject>.Create()))));
 ```
 3. Easily create own builders to increase readability:
 ``` csharp
 
 public class ComplexObjectBuilder : Builder<ComplexObjectBuilder, ComplexObject>
-{    
+{
     public ComplexObjectBuilder CallInit()
     {
-        return With(o => 
+        return With(o =>
         {
             o.Init("SET", "VAL1");
         });
     }
 
-    protected override OnBuild(ComplexObject obj) 
+    protected override void OnBuild(ComplexObject obj)
     {
         if (obj.Param1 == "")
-            obj.Param1 = "UNSET";        
+            obj.Init("UNSET", null);
     }
 
-    protected override Instance() 
+    protected override ComplexObjectBuilder Instance()
     {
         return this;
     }
 }
 
-[TestClass]
-public class ComplexObjectBuilder
+[TestFixture]
+public class ComplexObjectBuilderTest
 {
     [Test]
     public void TestMethod()
@@ -52,8 +52,8 @@ public class ComplexObjectBuilder
         var testObj = ComplexObjectBuilder.Create(cb => cb
             .With(o => o.SomeProperty = "Value")
             .CallInit());
-        
-        Assert.IsTrue("SET", testObj.Param1);
+
+        Assert.AreEqual("SET", testObj.Param1);
     }
 }
 ```
