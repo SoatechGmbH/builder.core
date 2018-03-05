@@ -5,8 +5,4 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Reflection" Version="4.3.0" />
-  </ItemGroup>
-
 </Project>
