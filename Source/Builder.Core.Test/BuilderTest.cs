@@ -62,10 +62,28 @@ namespace Builder.Core.Test
         }
 
         [Test]
+        public void BuildObjectWithConstructorWithFirstArgFncSetup()
+        {
+            var obj = Builder<ObjectWithConstructor>.Create(b => b
+                .WithCtorArg(() => 1));
+
+            Assert.AreEqual(1, obj.Val1);
+        }
+
+        [Test]
         public void BuildObjectWithConstructorWithNamedArgSetup()
         {
             var obj = Builder<ObjectWithConstructor>.Create(b => b
                 .WithCtorArg("val2", 1));
+
+            Assert.AreEqual(1, obj.Val2);
+        }
+
+        [Test]
+        public void BuildObjectWithConstructorWithNamedArgFncSetup()
+        {
+            var obj = Builder<ObjectWithConstructor>.Create(b => b
+                .WithCtorArg("val2", () => 1));
 
             Assert.AreEqual(1, obj.Val2);
         }
@@ -84,11 +102,23 @@ namespace Builder.Core.Test
         }
 
         [Test]
+        public void BuildObjectWithConstructorWithListBuilderFnc()
+        {
+            var obj = Builder<ObjectWithConstructor>.Create(b => b
+                .WithCtorArg(() => ListBuilder<string>.Create(lb =>  
+                    lb.Add("val1"))));
+
+            Assert.IsNotNull(obj.List);
+            Assert.AreEqual(1, obj.List.Count);
+            Assert.AreEqual("val1", obj.List[0]);
+        }
+
+        [Test]
         public void BuildObjectWithConstructorWithListBuilder()
         {
             var obj = Builder<ObjectWithConstructor>.Create(b => b
-                .WithCtorArg<List<string>, ListBuilder<string>>(s => 
-                    s.Add("val1")));
+                .WithCtorArg(ListBuilder<string>.Create(lb =>
+                    lb.Add("val1"))));
 
             Assert.IsNotNull(obj.List);
             Assert.AreEqual(1, obj.List.Count);

@@ -25,9 +25,21 @@ namespace Builder.Core
             return Instance();
         }
 
+        public TBuilder WithCtorArg(Func<object> argFnc)
+        {
+            ctorArgsBuilder.Add(new NamedCtorArgsBuilder(argFnc));
+            return Instance();
+        }
+
         public TBuilder WithCtorArg<TArg>(string name, TArg arg)
         {
             ctorArgsBuilder.Add(new NamedCtorArgsBuilder(name, () => arg));
+            return Instance();
+        }
+
+        public TBuilder WithCtorArg(string name, Func<object> argFnc)
+        {
+            ctorArgsBuilder.Add(new NamedCtorArgsBuilder(name, argFnc));
             return Instance();
         }
 
