@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Builder.Core.Test.TestObjects
+namespace Soatech.Builder.Core.Test.TestObjects
 {
     public class ObjectWithConstructor
     {

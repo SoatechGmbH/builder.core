@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.1.0</Version>
+    <PackageId>Soatech.Builder.Core</PackageId>
+    <Authors>Soatech</Authors>
+    <Company>Soatech GmbH</Company>
+    <Product>Soatech Builder Tools</Product>
+    <PackageProjectUrl>https://github.com/SoatechGmbH/builder.core</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/SoatechGmbH/builder.core/master/LICENSE</PackageLicenseUrl>
+    <Description>Core components for utilizing the builder pattern in test object construction.</Description>
+    <RepositoryUrl>https://github.com/SoatechGmbH/builder.core</RepositoryUrl>
+    <PackageTags>Builder Pattern Tests Tools</PackageTags>
+  </PropertyGroup>
+
+</Project>

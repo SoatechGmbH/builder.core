@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Builder.Core
+namespace Soatech.Builder.Core
 {
     public abstract class Builder<TBuilder, TObject> : BuilderBase<TBuilder, TObject>
         where TBuilder : Builder<TBuilder, TObject>, new()

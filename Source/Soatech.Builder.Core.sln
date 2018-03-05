@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Builder.Core", "Builder.Core\Builder.Core.csproj", "{8D6C52DD-0338-4403-B413-F7E8ACDF7719}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soatech.Builder.Core", "Soatech.Builder.Core\Soatech.Builder.Core.csproj", "{8D6C52DD-0338-4403-B413-F7E8ACDF7719}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Builder.Core.Test", "Builder.Core.Test\Builder.Core.Test.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soatech.Builder.Core.Test", "Soatech.Builder.Core.Test\Soatech.Builder.Core.Test.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

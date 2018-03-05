@@ -1,8 +1,8 @@
-﻿using Builder.Core.Test.TestObjects;
+﻿using Soatech.Builder.Core.Test.TestObjects;
 using NUnit.Framework;
 using System.Collections.Generic;
 
-namespace Builder.Core.Test
+namespace Soatech.Builder.Core.Test
 {
     [TestFixture]
     public class BuilderTest

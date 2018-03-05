@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Builder.Core
+namespace Soatech.Builder.Core
 {
     public abstract class BuilderBase<TBuilder, TObject>
         where TBuilder : BuilderBase<TBuilder, TObject>, new()

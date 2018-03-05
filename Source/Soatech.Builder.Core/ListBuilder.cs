@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Builder.Core
+namespace Soatech.Builder.Core
 {
     public abstract class ListBuilder<TBuilder, TItem> : CollectionBuilder<TBuilder, List<TItem>, TItem>
         where TBuilder : ListBuilder<TBuilder, TItem>, new()
