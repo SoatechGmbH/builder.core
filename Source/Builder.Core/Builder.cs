@@ -15,7 +15,8 @@ namespace Builder.Core
         static Builder()
         {
             var type = typeof(TObject);
-            knownCtors = type.GetConstructors(BindingFlags.Public | BindingFlags.Instance);            
+            knownCtors = type.GetTypeInfo().DeclaredConstructors
+                .Where(c => c.IsPublic).ToArray();
         }
 
         public TBuilder WithCtorArg<TArg>(TArg arg)
@@ -110,7 +111,7 @@ namespace Builder.Core
 
         private static object Default(Type type)
         {
-            return type.IsValueType ? Activator.CreateInstance(type) : null;
+            return type.GetTypeInfo().IsValueType ? Activator.CreateInstance(type) : null;
         }
 
         private class NamedCtorArgsBuilder
