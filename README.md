@@ -1,4 +1,4 @@
-<img src="https://soatech.visualstudio.com/_apis/public/build/definitions/d4cb291c-743a-44b0-91fe-6139e3974dd2/4/badge" />
+[<img src="https://soatech.visualstudio.com/_apis/public/build/definitions/d4cb291c-743a-44b0-91fe-6139e3974dd2/4/badge" />](https://soatech.visualstudio.com/Soatech%20Builder%20Tools/_build/index?definitionId=4)
 
 # Soatech.Builder.Core
 Core components for utilizing the builder pattern in test  object construction.
