@@ -1,6 +1,7 @@
 ﻿using Soatech.Builder.Core.Test.TestObjects;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System;
 
 namespace Soatech.Builder.Core.Test
 {
@@ -46,6 +47,18 @@ namespace Soatech.Builder.Core.Test
         }
 
         [Test]
+        public void BuildObjectWithoutInvalidConstructorArgs_InvalidOperationException()
+        {
+            var ex = Record.Exception(() => Builder<SimpleObject>.Create(b => b
+                .WithCtorArg("Not parameter needed")));
+
+            Assert.IsNotNull(ex);
+            Assert.IsInstanceOf(typeof(InvalidOperationException), ex);
+            Assert.IsTrue(ex.Message.Contains("No constructor found"));
+        }
+
+
+        [Test]
         public void BuildObjectWithConstructorWithoutSetup()
         {
             var obj = Builder<ObjectWithConstructor>.Create();
@@ -77,6 +90,17 @@ namespace Soatech.Builder.Core.Test
                 .WithCtorArg("val2", 1));
 
             Assert.AreEqual(1, obj.Val2);
+        }
+
+        [Test]
+        public void BuildObjectWithConstructorWithWrongNamedArg_InvalidOperationException()
+        {
+            var ex = Record.Exception(() => Builder<ObjectWithConstructor>.Create(b => b
+                .WithCtorArg("invalidArg", 1)));
+
+            Assert.IsNotNull(ex);
+            Assert.IsInstanceOf(typeof(InvalidOperationException), ex);
+            Assert.IsTrue(ex.Message.Contains("No constructor"));
         }
 
         [Test]

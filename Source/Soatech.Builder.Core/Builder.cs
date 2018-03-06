@@ -89,7 +89,7 @@ namespace Soatech.Builder.Core
             {
                 var parameters = ctor.GetParameters();
                 if (parameters.Length < ctorArgsBuilder.Count
-                    || argNames.Except(parameters.Select(p => p.Name)).Count() < 0)
+                    || argNames.Except(parameters.Select(p => p.Name)).Count() > 0)
                     continue;
 
                 var usedArgs = new List<object>();
@@ -117,8 +117,8 @@ namespace Soatech.Builder.Core
                 return (TObject)ctor.Invoke(usedArgs.ToArray());
             }
 
-            //No suitable constructor found. Return default instance.
-            return default(TObject);
+            //No suitable constructor found.
+            throw new InvalidOperationException($"No constructor for type {typeof(TObject)} with at least {ctorArgsBuilder.Count} parameters found.");
         }
 
         private static object Default(Type type)
