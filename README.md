@@ -17,8 +17,8 @@ var simpleObject = Builder<SimpleObject>.Create(ob => ob
 var complexObject = Builder<ComplexObject>.Create(b => b
     .WithCtorArg(() => Builder<SimpleObject>.Create())
     .With(co => co.List = ListBuilder<ItemObject>.Create(lb => lb
-.Add(Builder<ItemObject>.Create())
-.Add(Builder<ItemObject>.Create()))));
+        .Add(Builder<ItemObject>.Create())
+        .Add(Builder<ItemObject>.Create()))));
 ```
 3. Easily create own builders to increase readability:
 ``` csharp
