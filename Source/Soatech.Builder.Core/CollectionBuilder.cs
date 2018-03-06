@@ -34,14 +34,13 @@ namespace Soatech.Builder.Core
             });
         }
 
-        public TBuilder Add(int count, Func<int, Func<Builder<TItem>, Builder<TItem>>> setups)
+        public TBuilder Add(int count, Func<int, Builder<TItem>, Builder<TItem>> setups)
         {
             return With(c =>
             {
                 for (int i = 0; i < count; i++)
                 {
-                    Func<Builder<TItem>, Builder<TItem>> setup = setups == null ? b => b : setups(i);
-                    c.Add(Builder<TItem>.Create(setup));
+                    c.Add(Builder<TItem>.Create(b => setups(i, b)));
                 }
             });
         }

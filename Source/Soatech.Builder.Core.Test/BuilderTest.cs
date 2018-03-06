@@ -54,7 +54,7 @@ namespace Soatech.Builder.Core.Test
 
             Assert.IsNotNull(ex);
             Assert.IsInstanceOf(typeof(InvalidOperationException), ex);
-            Assert.IsTrue(ex.Message.Contains("No constructor found"));
+            Assert.IsTrue(ex.Message.Contains("No constructor"));
         }
 
 
