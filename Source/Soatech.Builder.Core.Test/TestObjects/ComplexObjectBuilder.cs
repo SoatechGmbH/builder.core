@@ -21,10 +21,5 @@ namespace Soatech.Builder.Core.Test.TestObjects
             if (obj.Param1 == "")
                 obj.Init("UNSET", null);
         }
-
-        protected override ComplexObjectBuilder Instance()
-        {
-            return this;
-        }
     }
 }

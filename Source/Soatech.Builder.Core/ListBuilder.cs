@@ -9,9 +9,5 @@ namespace Soatech.Builder.Core
 
     public class ListBuilder<TItem> : ListBuilder<ListBuilder<TItem>, TItem>
     {
-        protected override ListBuilder<TItem> Instance()
-        {
-            return this;
-        }
     }
 }

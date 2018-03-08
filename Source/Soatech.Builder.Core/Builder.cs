@@ -144,9 +144,5 @@ namespace Soatech.Builder.Core
 
     public class Builder<TObject> : Builder<Builder<TObject>, TObject>
     {
-        protected override Builder<TObject> Instance()
-        {
-            return this;
-        }
     }
 }

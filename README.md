@@ -38,11 +38,6 @@ public class ComplexObjectBuilder : Builder<ComplexObjectBuilder, ComplexObject>
         if (obj.Param1 == "")
             obj.Init("UNSET", null);
     }
-
-    protected override ComplexObjectBuilder Instance()
-    {
-        return this;
-    }
 }
 
 [TestFixture]

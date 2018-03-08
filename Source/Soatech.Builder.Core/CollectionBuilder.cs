@@ -49,9 +49,5 @@ namespace Soatech.Builder.Core
     public class CollectionBuilder<TCollection, TItem> : CollectionBuilder<CollectionBuilder<TCollection, TItem>, TCollection, TItem>
         where TCollection : ICollection<TItem>, new()
     {
-        protected override CollectionBuilder<TCollection, TItem> Instance()
-        {
-            return this;
-        }
     }
 }

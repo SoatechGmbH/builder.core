@@ -7,7 +7,10 @@ namespace Soatech.Builder.Core
         where TBuilder : BuilderBase<TBuilder, TObject>, new()
     {
 
-        protected abstract TBuilder Instance();
+        protected TBuilder Instance()
+        {
+            return (TBuilder)this;
+        }
 
         protected abstract TObject CreateObjectInstance();
 
