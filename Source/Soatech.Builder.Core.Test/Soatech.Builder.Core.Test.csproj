@@ -57,6 +57,7 @@
     <Compile Include="TestObjects\ChildObject.cs" />
     <Compile Include="TestObjects\ComplexObject.cs" />
     <Compile Include="TestObjects\ComplexObjectBuilder.cs" />
+    <Compile Include="TestObjects\IDerivedFormatProvider.cs" />
     <Compile Include="TestObjects\ObjectWithConstructor.cs" />
     <Compile Include="TestObjects\ObjectWithInterfaceConstructor.cs" />
     <Compile Include="TestObjects\ParentObject.cs" />

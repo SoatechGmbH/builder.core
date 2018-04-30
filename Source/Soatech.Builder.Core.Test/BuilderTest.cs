@@ -158,5 +158,16 @@ namespace Soatech.Builder.Core.Test
             Assert.IsNotNull(obj.FormatProvider);
             Assert.AreEqual(mockedInterace, obj.FormatProvider);
         }
+
+        [Test]
+        public void BuildObjectWithConstructorWithInterfaceBuilderDerivedFnc()
+        {
+            var mockedInterace = new Mock<IDerivedFormatProvider>().Object;
+            var obj = Builder<ObjectWithInterfaceConstructor>.Create(b => b
+                .WithCtorArg<IFormatProvider>(() => mockedInterace));
+
+            Assert.IsNotNull(obj.FormatProvider);
+            Assert.AreEqual(mockedInterace, obj.FormatProvider);
+        }
     }
 }
