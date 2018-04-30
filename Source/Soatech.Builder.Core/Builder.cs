@@ -21,39 +21,39 @@ namespace Soatech.Builder.Core
 
         public TBuilder WithCtorArg<TArg>(TArg arg)
         {
-            ctorArgsBuilder.Add(new NamedCtorArgsBuilder(() => arg));
+            ctorArgsBuilder.Add(new NamedCtorArgsBuilder(typeof(TArg), () => arg));
             return Instance();
         }
 
-        public TBuilder WithCtorArg(Func<object> argFnc)
+        public TBuilder WithCtorArg<TArg>(Func<TArg> argFnc)
         {
-            ctorArgsBuilder.Add(new NamedCtorArgsBuilder(argFnc));
+            ctorArgsBuilder.Add(new NamedCtorArgsBuilder(typeof(TArg), () => argFnc()));
             return Instance();
         }
 
         public TBuilder WithCtorArg<TArg>(string name, TArg arg)
         {
-            ctorArgsBuilder.Add(new NamedCtorArgsBuilder(name, () => arg));
+            ctorArgsBuilder.Add(new NamedCtorArgsBuilder(typeof(TArg), name, () => arg));
             return Instance();
         }
 
-        public TBuilder WithCtorArg(string name, Func<object> argFnc)
+        public TBuilder WithCtorArg<TArg>(string name, Func<TArg> argFnc)
         {
-            ctorArgsBuilder.Add(new NamedCtorArgsBuilder(name, argFnc));
+            ctorArgsBuilder.Add(new NamedCtorArgsBuilder(typeof(TArg), name, () => argFnc()));
             return Instance();
         }
 
         public TBuilder WithCtorArg<TArg>(Func<Builder<TArg>, Builder<TArg>> setup = null)
             where TArg : new()
         {
-            ctorArgsBuilder.Add(new NamedCtorArgsBuilder(() => Builder<TArg>.Create(setup)));
+            ctorArgsBuilder.Add(new NamedCtorArgsBuilder(typeof(TArg), () => Builder<TArg>.Create(setup)));
             return Instance();
         }
 
         public TBuilder WithCtorArg<TArg>(string name, Func<Builder<TArg>, Builder<TArg>> setup = null)
             where TArg : new()
         {
-            ctorArgsBuilder.Add(new NamedCtorArgsBuilder(name, () => Builder<TArg>.Create(setup)));
+            ctorArgsBuilder.Add(new NamedCtorArgsBuilder(typeof(TArg), name, () => Builder<TArg>.Create(setup)));
             return Instance();
         }
 
@@ -62,7 +62,7 @@ namespace Soatech.Builder.Core
         {
             if (setup == null)
                 setup = b => b;
-            ctorArgsBuilder.Add(new NamedCtorArgsBuilder(() => setup(new TArgBuilder()).Build()));
+            ctorArgsBuilder.Add(new NamedCtorArgsBuilder(typeof(TArg), () => setup(new TArgBuilder()).Build()));
             return Instance();
         }
 
@@ -71,16 +71,16 @@ namespace Soatech.Builder.Core
         {
             if (setup == null)
                 setup = b => b;
-            ctorArgsBuilder.Add(new NamedCtorArgsBuilder(name, () => setup(new TArgBuilder()).Build()));
+            ctorArgsBuilder.Add(new NamedCtorArgsBuilder(typeof(TArg), name, () => setup(new TArgBuilder()).Build()));
             return Instance();
         }
 
         protected override TObject CreateObjectInstance()
         {
             var args = ctorArgsBuilder
-                .Select(c => new Tuple<string, object>(c.Name, c.ArgsBuilder()))
-                .GroupBy(k => k.Item2.GetType())
-                .ToDictionary(k => k.Key, k => k.ToList());
+                .Select(c => new Tuple<NamedCtorArgsBuilder, object>(c, c.ArgsBuilder()))
+                .GroupBy(k => k.Item1.Type)
+                .ToDictionary(k => k.Key, k => k.Select(na => new Tuple<string, object>(na.Item1.Name, na.Item2)).ToList());
 
             var argNames = ctorArgsBuilder.Where(c => !string.IsNullOrEmpty(c.Name))
                 .Select(c => c.Name).ToList();
@@ -130,12 +130,15 @@ namespace Soatech.Builder.Core
         {
             public string Name { get; }
             public Func<object> ArgsBuilder { get; }
-            public NamedCtorArgsBuilder(Func<object> argsBuilder) : this(null, argsBuilder)
+            public Type Type { get; }
+
+            public NamedCtorArgsBuilder(Type type, Func<object> argsBuilder) : this(type, null, argsBuilder)
             {
             }
 
-            public NamedCtorArgsBuilder(string name, Func<object> argsBuilder) 
+            public NamedCtorArgsBuilder(Type type, string name, Func<object> argsBuilder) 
             {
+                Type = type;
                 Name = name;
                 ArgsBuilder = argsBuilder;
             }

@@ -1,7 +1,7 @@
 ﻿using Soatech.Builder.Core.Test.TestObjects;
 using NUnit.Framework;
-using System.Collections.Generic;
 using System;
+using Moq;
 
 namespace Soatech.Builder.Core.Test
 {
@@ -56,7 +56,6 @@ namespace Soatech.Builder.Core.Test
             Assert.IsInstanceOf(typeof(InvalidOperationException), ex);
             Assert.IsTrue(ex.Message.Contains("No constructor"));
         }
-
 
         [Test]
         public void BuildObjectWithConstructorWithoutSetup()
@@ -147,6 +146,17 @@ namespace Soatech.Builder.Core.Test
             Assert.IsNotNull(obj.List);
             Assert.AreEqual(1, obj.List.Count);
             Assert.AreEqual("val1", obj.List[0]);
+        }
+
+        [Test]
+        public void BuildObjectWithConstructorWithInterfaceBuilderFnc()
+        {
+            var mockedInterace = new Mock<IFormatProvider>().Object;
+            var obj = Builder<ObjectWithInterfaceConstructor>.Create(b => b
+                .WithCtorArg(() => mockedInterace));
+
+            Assert.IsNotNull(obj.FormatProvider);
+            Assert.AreEqual(mockedInterace, obj.FormatProvider);
         }
     }
 }
